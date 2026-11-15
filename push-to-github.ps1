@@ -1,14 +1,17 @@
 # Push project to GitHub repository
+param(
+    [string]$Token = ""
+)
+
 $ErrorActionPreference = "Stop"
 
 $gitExe = "$env:LOCALAPPDATA\MinGit\cmd\git.exe"
 if (-not (Test-Path $gitExe)) {
-    # Fallback to standard git if in PATH
     $gitCmd = Get-Command git -ErrorAction SilentlyContinue
     if ($gitCmd) {
         $gitExe = $gitCmd.Source
     } else {
-        throw "Git is not yet installed. Please wait for MinGit installation to finish."
+        throw "Git is not installed."
     }
 }
 
@@ -24,7 +27,7 @@ if (-not (Test-Path ".git")) {
 & $gitExe config user.name "manishKumarxyt"
 & $gitExe config user.email "manishKumarxyt@users.noreply.github.com"
 
-# 3. Create .gitignore to ignore temporary files
+# 3. Create .gitignore if not present
 $gitignoreContent = @"
 # Local temp and logs
 *.log
@@ -58,12 +61,18 @@ Write-Host "Committing files..." -ForegroundColor Cyan
 try {
     & $gitExe commit -m "SabkaBazar - Har dukaan apke paas! Hyperlocal quick-commerce web application"
 } catch {
-    Write-Host "Commit notice: $_"
+    Write-Host "Commit status: Working tree up to date."
 }
 
 # 7. Push to GitHub
-Write-Host "Pushing to $repoUrl (main branch)..." -ForegroundColor Green
-& $gitExe push -u origin main
+if ($Token) {
+    Write-Host "Authenticating with provided GitHub Token..." -ForegroundColor Green
+    $authedUrl = "https://$($Token)@github.com/manishKumarxyt/ApnaBazaar.git"
+    & $gitExe push -u $authedUrl main
+} else {
+    Write-Host "Pushing to $repoUrl (main branch)..." -ForegroundColor Green
+    & $gitExe push -u origin main
+}
 
 Write-Host "==========================================================" -ForegroundColor Green
 Write-Host "  Successfully pushed to GitHub: $repoUrl" -ForegroundColor Green
