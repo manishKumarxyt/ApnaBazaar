@@ -1,0 +1,3 @@
+# Local temp and logs
+*.log
+.system_generated/

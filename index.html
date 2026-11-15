@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SabkaBazar | Har dukaan apke paas! - Shop Local, Shop Smart</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bazar: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            },
+            saffron: {
+              50: '#fff7ed',
+              500: '#f97316',
+              600: '#ea580c',
+              700: '#c2410c',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
+
+  <!-- ================= TOP NOTICE & ROTATING TAGLINES TICKER ================= -->
+  <div class="bg-gradient-to-r from-bazar-900 via-bazar-800 to-teal-900 text-white text-xs sm:text-sm py-2 px-4 shadow-sm relative z-50">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <!-- Live Tagline Ticker -->
+      <div class="flex items-center gap-2 overflow-hidden w-full md:w-3/4">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-saffron-500 text-white whitespace-nowrap shadow-sm">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> SABKABAZAR
+        </span>
+        <div class="ticker-wrap flex-1">
+          <div class="ticker-content space-x-8 font-medium tracking-wide">
+            <span class="inline-flex items-center gap-1.5 text-amber-200">
+              <i data-lucide="store" class="w-3.5 h-3.5"></i> <strong>Har dukaan apke paas!</strong>
+            </span>
+            <span class="text-white/80">•</span>
+            <span class="text-emerald-200">✨ Har zaroorat, ek bazaar</span>
+            <span class="text-white/80">•</span>
+            <span class="text-amber-200">🛍️ Aapka Apna Shopping Bazaar</span>
+            <span class="text-white/80">•</span>
+            <span class="text-emerald-200">⚡ Shop local, shop smart</span>
+            <span class="text-white/80">•</span>
+            <span class="text-amber-200">🚀 Har dukaan ab online</span>
+            <span class="text-white/80">•</span>
+            <span class="text-emerald-200">⏱️ 15-20 Mins Delivery by local verified store riders</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Action: Dukaan Jodo Button on Top -->
+      <div class="hidden md:flex items-center gap-3">
+        <button onclick="App.openStoreOnboardingModal()" class="inline-flex items-center gap-1.5 bg-amber-500 hover:bg-amber-400 text-slate-900 px-3 py-1 rounded-full text-xs font-bold transition shadow-sm">
+          <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i> Dukaan Jodo (Merchant Sign up)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= STICKY MAIN HEADER (BLINKIT-STYLE ELEVATED) ================= -->
+  <header class="sticky top-0 z-40 glass-header border-b border-slate-200 shadow-sm transition-all duration-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <div class="flex items-center justify-between gap-3 sm:gap-6">
+        
+        <!-- Brand Logo & Tagline -->
+        <div class="flex items-center gap-3 cursor-pointer select-none" onclick="App.showHome()">
+          <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-bazar-600 to-teal-800 flex items-center justify-center text-white shadow-md shadow-emerald-900/20 ring-2 ring-emerald-500/30">
+            <i data-lucide="shopping-bag" class="w-6 h-6 text-amber-300"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="text-2xl font-extrabold tracking-tight text-slate-900 font-['Outfit']">Sabka<span class="text-bazar-600">Bazar</span></span>
+              <span class="px-1.5 py-0.5 text-[10px] uppercase font-bold tracking-wider bg-amber-100 text-amber-800 rounded border border-amber-300">Local</span>
+            </div>
+            <p class="text-[11px] font-semibold text-slate-500 tracking-tight flex items-center gap-1">
+              <span>Har dukaan apke paas!</span>
+              <span class="w-1 h-1 rounded-full bg-emerald-500 inline-block"></span>
+              <span class="text-emerald-700">15 min</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Location Selector (Clickable like Blinkit) -->
+        <div class="hidden lg:flex items-center gap-2 cursor-pointer p-2 rounded-xl hover:bg-slate-100 border border-transparent hover:border-slate-200 transition" onclick="App.openLocationModal()">
+          <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center">
+            <i data-lucide="map-pin" class="w-4 h-4"></i>
+          </div>
+          <div class="text-left text-xs">
+            <div class="font-bold text-slate-800 flex items-center gap-1">
+              <span id="current-location-text">Sector 14, Main Market, Gurugram</span>
+              <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400"></i>
+            </div>
+            <div class="text-[11px] text-slate-500">Delivering from nearest 14 local stores</div>
+          </div>
+        </div>
+
+        <!-- Global Search Bar with Live Filter -->
+        <div class="flex-1 max-w-xl relative">
+          <div class="relative">
+            <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input 
+              id="global-search-input"
+              type="text" 
+              placeholder="Search for 'Drill machine', 'Charger', 'Kurti', 'Atta' or local stores..."
+              class="w-full pl-10 pr-24 py-2.5 bg-slate-100 hover:bg-white focus:bg-white border border-slate-200 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-bazar-600 focus:border-transparent transition shadow-inner"
+              oninput="App.handleSearch(this.value)"
+            >
+            <button 
+              onclick="App.clearSearch()" 
+              id="search-clear-btn"
+              class="hidden absolute right-16 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1">
+              <i data-lucide="x" class="w-3.5 h-3.5"></i>
+            </button>
+            <span class="absolute right-3 top-1/2 -translate-y-1/2 px-2 py-0.5 text-[10px] font-semibold bg-slate-200 text-slate-600 rounded">
+              / search
+            </span>
+          </div>
+
+          <!-- Search Results Dropdown -->
+          <div id="search-results-dropdown" class="hidden absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-slate-200 max-h-96 overflow-y-auto z-50 p-2">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <!-- Header Actions: Merchant Portal & Cart Button -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          
+          <!-- Connect Store Button -->
+          <button 
+            onclick="App.openStoreOnboardingModal()" 
+            class="hidden sm:inline-flex items-center gap-2 bg-white hover:bg-emerald-50 text-bazar-700 border border-bazar-600/30 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold shadow-sm transition hover:shadow">
+            <i data-lucide="store" class="w-4 h-4 text-bazar-600"></i>
+            <span>Dukaan Jodo</span>
+          </button>
+
+          <!-- Cart Button (Blinkit Style Pill) -->
+          <button 
+            onclick="App.openCartDrawer()" 
+            class="flex items-center gap-2 bg-gradient-to-r from-bazar-700 to-bazar-600 hover:from-bazar-800 hover:to-bazar-700 text-white px-3 sm:px-4 py-2 rounded-xl font-bold shadow-md shadow-emerald-700/20 transition transform active:scale-95 text-xs sm:text-sm">
+            <div class="relative">
+              <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+              <span id="cart-badge-count" class="absolute -top-2 -right-2 bg-saffron-500 text-white text-[10px] font-black w-4 h-4 rounded-full flex items-center justify-center">0</span>
+            </div>
+            <div class="hidden sm:block text-left text-xs leading-tight border-l border-white/20 pl-2">
+              <div id="cart-items-preview" class="text-[10px] text-emerald-100">0 items</div>
+              <div id="cart-total-preview" class="font-extrabold text-amber-200">₹0</div>
+            </div>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Mobile Location Bar -->
+      <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-xs lg:hidden" onclick="App.openLocationModal()">
+        <div class="flex items-center gap-1.5 text-slate-700 truncate">
+          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-bazar-600 flex-shrink-0"></i>
+          <span class="font-semibold truncate" id="mobile-location-text">Sector 14, Main Market, Gurugram</span>
+        </div>
+        <span class="text-bazar-700 font-bold text-[11px] underline flex-shrink-0">Change</span>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================= HERO BRAND BANNER & TAGLINES ================= -->
+  <section class="bg-gradient-to-br from-bazar-900 via-teal-900 to-slate-900 text-white relative overflow-hidden py-8 sm:py-12 border-b border-bazar-800">
+    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#10b981_1px,transparent_1px)] [background-size:16px_16px]"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <!-- Brand Message -->
+        <div class="lg:col-span-7 space-y-4">
+          
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs font-semibold">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            Aapka Apna Hyperlocal Shopping Platform
+          </div>
+
+          <h1 class="text-3xl sm:text-5xl font-black font-['Outfit'] tracking-tight leading-tight">
+            SabkaBazar <br>
+            <span class="bg-gradient-to-r from-amber-300 via-emerald-300 to-teal-200 bg-clip-text text-transparent">
+              Har dukaan apke paas!
+            </span>
+          </h1>
+
+          <!-- User's Requested Taglines Showcase -->
+          <div class="flex flex-wrap gap-2 pt-1">
+            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-white/10 hover:bg-white/15 text-xs text-white font-medium border border-white/10 transition">
+              <i data-lucide="sparkle" class="w-3 h-3 text-amber-300"></i> Har zaroorat, ek bazaar
+            </span>
+            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-white/10 hover:bg-white/15 text-xs text-white font-medium border border-white/10 transition">
+              <i data-lucide="shopping-bag" class="w-3 h-3 text-amber-300"></i> Aapka Apna Shopping Bazaar
+            </span>
+            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-white/10 hover:bg-white/15 text-xs text-white font-medium border border-white/10 transition">
+              <i data-lucide="tag" class="w-3 h-3 text-amber-300"></i> Shop local, shop smart
+            </span>
+            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-white/10 hover:bg-white/15 text-xs text-white font-medium border border-white/10 transition">
+              <i data-lucide="zap" class="w-3 h-3 text-amber-300"></i> Har dukaan ab online
+            </span>
+          </div>
+
+          <p class="text-sm sm:text-base text-slate-300 max-w-xl leading-relaxed">
+            Connect with all neighborhood stores — from <strong>Hardware</strong>, <strong>Electronics</strong> and <strong>Clothes</strong> to Kirana, Pharmacy & Sweets. Read genuine customer reviews, browse shop catalogs, and get 15-minute doorstep delivery!
+          </p>
+
+          <!-- Value Props -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 text-xs">
+            <div class="bg-white/5 backdrop-blur rounded-xl p-2.5 border border-white/10">
+              <div class="text-amber-300 font-extrabold text-base">⚡ 15 Mins</div>
+              <div class="text-slate-300 text-[11px]">Instant Local Delivery</div>
+            </div>
+            <div class="bg-white/5 backdrop-blur rounded-xl p-2.5 border border-white/10">
+              <div class="text-emerald-300 font-extrabold text-base">🛡️ 100% Genuine</div>
+              <div class="text-slate-300 text-[11px]">Verified Dukaan Products</div>
+            </div>
+            <div class="bg-white/5 backdrop-blur rounded-xl p-2.5 border border-white/10">
+              <div class="text-blue-300 font-extrabold text-base">⭐ Real Reviews</div>
+              <div class="text-slate-300 text-[11px]">Neighborhood Ratings</div>
+            </div>
+            <div class="bg-white/5 backdrop-blur rounded-xl p-2.5 border border-white/10">
+              <div class="text-pink-300 font-extrabold text-base">🤝 Local First</div>
+              <div class="text-slate-300 text-[11px]">Direct Support to Shops</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Interactive Quick Actions / Feature Cards -->
+        <div class="lg:col-span-5 flex flex-col gap-3">
+          
+          <!-- Connect Your Local Store Card -->
+          <div class="bg-gradient-to-br from-amber-500/20 to-emerald-600/20 border border-amber-400/30 rounded-2xl p-5 backdrop-blur-md relative overflow-hidden group">
+            <div class="flex items-start justify-between">
+              <div>
+                <span class="text-[11px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-amber-400 text-slate-900">
+                  Dukaan Malik Portal
+                </span>
+                <h3 class="text-lg font-bold text-white mt-2">Apni Dukaan SabkaBazar Se Jodo</h3>
+                <p class="text-xs text-slate-300 mt-1">List your products, receive neighborhood orders online, and build customer reviews.</p>
+              </div>
+              <div class="w-12 h-12 rounded-2xl bg-amber-400 text-slate-900 flex items-center justify-center font-bold text-xl shadow-lg">
+                <i data-lucide="store" class="w-6 h-6"></i>
+              </div>
+            </div>
+            <div class="mt-4 flex items-center gap-2">
+              <button onclick="App.openStoreOnboardingModal()" class="w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold py-2.5 px-4 rounded-xl text-xs sm:text-sm transition flex items-center justify-center gap-1.5 shadow-md">
+                <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                Register Store & Add Products Now
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Category Shortcut Pill Bar -->
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-4">
+            <div class="text-xs font-semibold text-slate-300 mb-2 flex items-center justify-between">
+              <span>Quick Jump to Category Stores:</span>
+              <span class="text-amber-300 text-[11px]">With Verified Reviews</span>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              <button onclick="App.selectCategory('electronics')" class="px-2.5 py-1 rounded-lg bg-blue-500/20 hover:bg-blue-500/40 text-blue-200 border border-blue-400/30 text-xs font-medium flex items-center gap-1 transition">
+                ⚡ Electronics (3)
+              </button>
+              <button onclick="App.selectCategory('hardware')" class="px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/40 text-amber-200 border border-amber-400/30 text-xs font-medium flex items-center gap-1 transition">
+                🔧 Hardware (2)
+              </button>
+              <button onclick="App.selectCategory('clothes')" class="px-2.5 py-1 rounded-lg bg-pink-500/20 hover:bg-pink-500/40 text-pink-200 border border-pink-400/30 text-xs font-medium flex items-center gap-1 transition">
+                👗 Clothes (2)
+              </button>
+              <button onclick="App.selectCategory('kirana')" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/40 text-emerald-200 border border-emerald-400/30 text-xs font-medium flex items-center gap-1 transition">
+                🛒 Kirana
+              </button>
+              <button onclick="App.selectCategory('pharmacy')" class="px-2.5 py-1 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/40 text-cyan-200 border border-cyan-400/30 text-xs font-medium flex items-center gap-1 transition">
+                💊 Pharmacy
+              </button>
+              <button onclick="App.selectCategory('bakery')" class="px-2.5 py-1 rounded-lg bg-red-500/20 hover:bg-red-500/40 text-red-200 border border-red-400/30 text-xs font-medium flex items-center gap-1 transition">
+                🎂 Sweets & Bakery
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= ALL CATEGORIES GRID (PRIMARY NAVIGATION) ================= -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+    
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-6 gap-2">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-6 rounded-full bg-bazar-600 inline-block"></span>
+          <h2 class="text-xl sm:text-2xl font-black font-['Outfit'] text-slate-900">
+            Explore All Local Store Categories
+          </h2>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-500 mt-1">
+          Click on any category to view all verified local stores with their ratings, reviews & catalogs
+        </p>
+      </div>
+
+      <!-- Reset / View All button -->
+      <button 
+        id="view-all-stores-btn"
+        onclick="App.showAllStores()" 
+        class="inline-flex items-center gap-1.5 text-xs font-bold text-bazar-700 hover:text-bazar-900 bg-emerald-50 hover:bg-emerald-100 px-3 py-1.5 rounded-lg transition self-start sm:self-auto">
+        <span>View All Stores (Nearby)</span>
+        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+      </button>
+    </div>
+
+    <!-- Category Cards Grid -->
+    <div id="categories-grid" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
+      <!-- Populated dynamically via JS -->
+    </div>
+
+  </section>
+
+  <!-- ================= STORES & REVIEWS SECTION ================= -->
+  <section id="stores-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 w-full flex-1">
+    
+    <!-- Dynamic Category Section Header -->
+    <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-2.5">
+          <div id="section-cat-icon-container" class="w-10 h-10 rounded-xl bg-bazar-100 text-bazar-800 flex items-center justify-center">
+            <i id="section-cat-icon" data-lucide="store" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h2 id="section-cat-title" class="text-xl sm:text-2xl font-black text-slate-900 font-['Outfit']">
+              All Local Stores in Sector 14
+            </h2>
+            <p id="section-cat-desc" class="text-xs sm:text-sm text-slate-500">
+              Browse stores, verify customer reviews, and order directly from local merchants
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Filter Pills -->
+      <div class="flex flex-wrap items-center gap-2 text-xs">
+        <span class="text-slate-400 font-medium">Filter:</span>
+        <button onclick="App.filterStores('all')" class="filter-chip active-filter px-3 py-1.5 rounded-lg border font-semibold transition" data-filter="all">
+          All Stores
+        </button>
+        <button onclick="App.filterStores('top_rated')" class="filter-chip px-3 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-medium transition" data-filter="top_rated">
+          ⭐ 4.8+ Top Rated
+        </button>
+        <button onclick="App.filterStores('fastest')" class="filter-chip px-3 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-medium transition" data-filter="fastest">
+          ⚡ Under 15 mins
+        </button>
+        <button onclick="App.filterStores('verified')" class="filter-chip px-3 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-medium transition" data-filter="verified">
+          🛡️ Verified Merchant
+        </button>
+      </div>
+    </div>
+
+    <!-- Stores Container -->
+    <div id="stores-list-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Populated dynamically via JS -->
+    </div>
+
+    <!-- Empty State for Stores -->
+    <div id="stores-empty-state" class="hidden text-center py-16 bg-white rounded-2xl border border-slate-200">
+      <div class="w-16 h-16 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-3">
+        <i data-lucide="store" class="w-8 h-8"></i>
+      </div>
+      <h3 class="text-lg font-bold text-slate-800">No Stores Found in this Category</h3>
+      <p class="text-xs sm:text-sm text-slate-500 max-w-sm mx-auto mt-1">Be the first to connect a local store in this category!</p>
+      <button onclick="App.openStoreOnboardingModal()" class="mt-4 bg-bazar-600 hover:bg-bazar-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition">
+        + Connect This Store
+      </button>
+    </div>
+
+  </section>
+
+  <!-- ================= POPULAR LOCAL ITEMS SHOWCASE (BLINKIT STYLE) ================= -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full border-t border-slate-200/80 mt-6">
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-6 rounded-full bg-amber-500 inline-block"></span>
+          <h2 class="text-xl sm:text-2xl font-black font-['Outfit'] text-slate-900">
+            Fast-Moving Items from Nearby Dukaans
+          </h2>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Ready for instant packing & 15-minute delivery</p>
+      </div>
+    </div>
+
+    <div id="popular-items-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+      <!-- Populated via JS -->
+    </div>
+  </section>
+
+  <!-- ================= FOOTER WITH TAGLINES ================= -->
+  <footer class="bg-slate-900 text-white mt-12 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        
+        <!-- Brand Col -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-2">
+            <div class="w-9 h-9 rounded-xl bg-bazar-600 flex items-center justify-center text-white font-bold shadow">
+              <i data-lucide="shopping-bag" class="w-5 h-5 text-amber-300"></i>
+            </div>
+            <span class="text-2xl font-extrabold tracking-tight font-['Outfit']">Sabka<span class="text-bazar-500">Bazar</span></span>
+          </div>
+          <p class="text-sm font-semibold text-amber-400">Har dukaan apke paas!</p>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Connecting neighborhood merchants and customers with lightning-fast delivery, transparent reviews, and zero middlemen.
+          </p>
+          <div class="text-[11px] text-slate-500">
+            Aapka Apna Shopping Bazaar • Shop Local, Shop Smart
+          </div>
+        </div>
+
+        <!-- Categories Col -->
+        <div>
+          <h4 class="text-sm font-bold text-slate-200 uppercase tracking-wider mb-3">Browse Categories</h4>
+          <ul class="space-y-2 text-xs text-slate-400">
+            <li><a href="javascript:void(0)" onclick="App.selectCategory('electronics')" class="hover:text-emerald-400">⚡ Electronics Stores & Repair</a></li>
+            <li><a href="javascript:void(0)" onclick="App.selectCategory('hardware')" class="hover:text-emerald-400">🔧 Hardware, Tools & Sanitary</a></li>
+            <li><a href="javascript:void(0)" onclick="App.selectCategory('clothes')" class="hover:text-emerald-400">👗 Clothes, Boutiques & Fashion</a></li>
+            <li><a href="javascript:void(0)" onclick="App.selectCategory('kirana')" class="hover:text-emerald-400">🛒 Kirana, Atta & Daily Ration</a></li>
+            <li><a href="javascript:void(0)" onclick="App.selectCategory('pharmacy')" class="hover:text-emerald-400">💊 Pharmacy & Medical Supplies</a></li>
+            <li><a href="javascript:void(0)" onclick="App.selectCategory('bakery')" class="hover:text-emerald-400">🎂 Sweets, Bakery & Snacks</a></li>
+          </ul>
+        </div>
+
+        <!-- Dukaan Partners -->
+        <div>
+          <h4 class="text-sm font-bold text-slate-200 uppercase tracking-wider mb-3">For Local Shopkeepers</h4>
+          <ul class="space-y-2 text-xs text-slate-400">
+            <li><a href="javascript:void(0)" onclick="App.openStoreOnboardingModal()" class="text-amber-400 font-bold hover:underline">🏪 Register Your Dukaan</a></li>
+            <li><a href="javascript:void(0)" onclick="App.openStoreOnboardingModal()" class="hover:text-emerald-400">List Your Inventory</a></li>
+            <li><a href="javascript:void(0)" onclick="App.openMerchantDashboard()" class="hover:text-emerald-400">Merchant Orders Dashboard</a></li>
+            <li><a href="javascript:void(0)" class="hover:text-emerald-400">Merchant Review Verification</a></li>
+            <li><a href="javascript:void(0)" class="hover:text-emerald-400">Hyperlocal Delivery Fleet Partner</a></li>
+          </ul>
+        </div>
+
+        <!-- Taglines & Promise -->
+        <div class="space-y-3">
+          <h4 class="text-sm font-bold text-slate-200 uppercase tracking-wider mb-3">SabkaBazar Vachan</h4>
+          <div class="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700 text-xs text-slate-300 space-y-2">
+            <div class="flex items-center gap-1.5 text-amber-300 font-bold">
+              <i data-lucide="check-circle" class="w-4 h-4"></i> Har dukaan ab online
+            </div>
+            <p class="text-[11px] text-slate-400">
+              Every local store gets equal visibility and digital tools. No commissions squeezing our local brothers.
+            </p>
+          </div>
+          <div class="text-[11px] text-slate-500">
+            Made with ❤️ for Indian Local Merchants and Smart Shoppers.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="border-t border-slate-800 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-2">
+        <div>
+          © 2026 SabkaBazar. Har dukaan apke paas! Har zaroorat, ek bazaar.
+        </div>
+        <div class="flex items-center gap-4">
+          <span>Aapka Apna Shopping Bazaar</span>
+          <span>•</span>
+          <span>Shop local, shop smart</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= MODAL 1: STORE FRONT & PRODUCTS (BLINKIT STORE VIEW) ================= -->
+  <div id="store-modal" class="hidden fixed inset-0 z-50 overflow-y-auto modal-backdrop flex items-center justify-center p-2 sm:p-4">
+    <div class="bg-white w-full max-w-4xl rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[92vh] animate-in fade-in zoom-in-95 duration-200">
+      
+      <!-- Store Header with Banner -->
+      <div class="relative h-44 sm:h-56 bg-slate-900 flex-shrink-0">
+        <img id="modal-store-banner" src="" alt="Banner" class="w-full h-full object-cover opacity-60">
+        <div class="absolute inset-0 store-banner-overlay"></div>
+        
+        <!-- Close Button -->
+        <button onclick="App.closeStoreModal()" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 hover:bg-black text-white flex items-center justify-center transition">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+
+        <!-- Store Info Overlay -->
+        <div class="absolute bottom-3 left-4 right-4 flex items-end justify-between gap-3 text-white">
+          <div class="flex items-end gap-3">
+            <img id="modal-store-image" src="" alt="Store" class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border-2 border-white shadow-md bg-white">
+            <div>
+              <div class="flex items-center gap-2">
+                <span id="modal-store-badge" class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-400 text-slate-900">Top Rated</span>
+                <span id="modal-store-verified" class="text-xs text-emerald-300 font-bold flex items-center gap-1">
+                  <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Verified Dukaan
+                </span>
+              </div>
+              <h2 id="modal-store-name" class="text-lg sm:text-2xl font-black font-['Outfit'] mt-0.5 leading-tight">Store Name</h2>
+              <p id="modal-store-address" class="text-xs text-slate-300 line-clamp-1">Address</p>
+            </div>
+          </div>
+
+          <div class="text-right flex-shrink-0">
+            <div class="inline-flex items-center gap-1 px-2.5 py-1 rounded-xl bg-white text-slate-900 font-extrabold text-sm shadow">
+              <span id="modal-store-rating" class="text-amber-500">4.8</span>
+              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500 text-amber-500"></i>
+              <span id="modal-store-review-count" class="text-xs text-slate-500 font-normal">(342)</span>
+            </div>
+            <div id="modal-store-time" class="text-[11px] text-emerald-300 font-bold mt-1">15 mins delivery</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs: Products & Reviews -->
+      <div class="bg-white border-b border-slate-200 px-4 sm:px-6 flex items-center justify-between flex-shrink-0">
+        <div class="flex items-center gap-4 sm:gap-8">
+          <button id="store-tab-products-btn" onclick="App.switchStoreTab('products')" class="py-3 font-bold text-sm border-b-2 border-bazar-600 text-bazar-700 flex items-center gap-2">
+            <i data-lucide="package" class="w-4 h-4"></i>
+            <span>Dukaan Inventory (<span id="modal-products-count">0</span>)</span>
+          </button>
+          <button id="store-tab-reviews-btn" onclick="App.switchStoreTab('reviews')" class="py-3 font-bold text-sm border-b-2 border-transparent text-slate-500 hover:text-slate-800 flex items-center gap-2">
+            <i data-lucide="message-square" class="w-4 h-4"></i>
+            <span>Customer Reviews & Ratings (<span id="modal-reviews-count">0</span>)</span>
+          </button>
+          <button id="store-tab-about-btn" onclick="App.switchStoreTab('about')" class="hidden sm:flex py-3 font-bold text-sm border-b-2 border-transparent text-slate-500 hover:text-slate-800 items-center gap-2">
+            <i data-lucide="info" class="w-4 h-4"></i>
+            <span>About Merchant</span>
+          </button>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button onclick="App.openAddProductToCurrentStore()" class="inline-flex items-center gap-1 text-xs font-bold text-amber-700 bg-amber-50 hover:bg-amber-100 border border-amber-300/60 px-2.5 py-1.5 rounded-lg transition">
+            <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+            <span class="hidden sm:inline">Add Item to This Store</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab Content Area -->
+      <div class="p-4 sm:p-6 overflow-y-auto flex-1 bg-slate-50">
+        
+        <!-- 1. Products Tab View -->
+        <div id="store-tab-products">
+          <div id="modal-products-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <!-- 2. Reviews Tab View -->
+        <div id="store-tab-reviews" class="hidden space-y-6">
+          
+          <!-- Rating Summary Box -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+            <div class="text-center md:border-r border-slate-100 md:pr-6">
+              <div id="rev-summary-score" class="text-5xl font-black text-slate-900 font-['Outfit']">4.8</div>
+              <div class="flex items-center justify-center gap-1 my-1 text-amber-500">
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star-half" class="w-4 h-4 fill-amber-500"></i>
+              </div>
+              <div id="rev-summary-total" class="text-xs text-slate-500 font-medium">Based on 342 neighborhood reviews</div>
+            </div>
+
+            <!-- Star breakdown bars -->
+            <div class="space-y-1.5 text-xs text-slate-600">
+              <div class="flex items-center gap-2">
+                <span class="w-6 text-right font-medium">5 ★</span>
+                <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+                  <div class="bg-emerald-500 h-full rounded-full" style="width: 82%"></div>
+                </div>
+                <span class="w-8 text-slate-400">82%</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-6 text-right font-medium">4 ★</span>
+                <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+                  <div class="bg-emerald-400 h-full rounded-full" style="width: 12%"></div>
+                </div>
+                <span class="w-8 text-slate-400">12%</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-6 text-right font-medium">3 ★</span>
+                <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+                  <div class="bg-amber-400 h-full rounded-full" style="width: 4%"></div>
+                </div>
+                <span class="w-8 text-slate-400">4%</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-6 text-right font-medium">2 ★</span>
+                <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+                  <div class="bg-orange-400 h-full rounded-full" style="width: 1%"></div>
+                </div>
+                <span class="w-8 text-slate-400">1%</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-6 text-right font-medium">1 ★</span>
+                <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+                  <div class="bg-red-400 h-full rounded-full" style="width: 1%"></div>
+                </div>
+                <span class="w-8 text-slate-400">1%</span>
+              </div>
+            </div>
+
+            <!-- Write a review CTA -->
+            <div class="text-center md:pl-4">
+              <h4 class="text-xs font-bold text-slate-800">Purchased from this shop?</h4>
+              <p class="text-[11px] text-slate-500 mt-0.5">Help your neighbors shop with confidence</p>
+              <button onclick="App.toggleWriteReviewBox()" class="mt-2.5 inline-flex items-center gap-1.5 bg-bazar-600 hover:bg-bazar-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow-sm">
+                <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                Write a Store Review
+              </button>
+            </div>
+          </div>
+
+          <!-- Write Review Inline Form (Toggleable) -->
+          <div id="write-review-container" class="hidden bg-emerald-50/70 border border-emerald-200 rounded-2xl p-5">
+            <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <i data-lucide="message-circle" class="w-4 h-4 text-bazar-600"></i>
+              Write Your Review for this Dukaan
+            </h4>
+            
+            <form onsubmit="App.handleReviewSubmit(event)" class="mt-3 space-y-3">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Your Name</label>
+                  <input type="text" id="review-input-name" required placeholder="e.g. Ramesh Saxena" class="w-full text-xs p-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-bazar-600 focus:outline-none">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Item Purchased (Optional)</label>
+                  <input type="text" id="review-input-item" placeholder="e.g. Fast Charger or Drill kit" class="w-full text-xs p-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-bazar-600 focus:outline-none">
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Rating</label>
+                <div class="flex items-center gap-2">
+                  <select id="review-input-rating" class="text-xs p-2 rounded-xl border border-slate-300 bg-white font-bold text-amber-600 focus:outline-none">
+                    <option value="5">⭐⭐⭐⭐⭐ (5 - Outstanding Service)</option>
+                    <option value="4">⭐⭐⭐⭐ (4 - Very Good)</option>
+                    <option value="3">⭐⭐⭐ (3 - Average)</option>
+                    <option value="2">⭐⭐ (2 - Below Average)</option>
+                    <option value="1">⭐ (1 - Needs Improvement)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Your Experience / Review</label>
+                <textarea id="review-input-text" rows="3" required placeholder="Tell neighbors about delivery speed, product authenticity, pricing and shopkeeper behavior..." class="w-full text-xs p-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-bazar-600 focus:outline-none"></textarea>
+              </div>
+
+              <div class="flex justify-end gap-2">
+                <button type="button" onclick="App.toggleWriteReviewBox()" class="px-3 py-1.5 text-xs text-slate-600 hover:text-slate-800 font-semibold">Cancel</button>
+                <button type="submit" class="bg-bazar-600 hover:bg-bazar-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow">
+                  Submit Verified Review
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Reviews List -->
+          <div id="modal-reviews-list" class="space-y-3">
+            <!-- Populated via JS -->
+          </div>
+
+        </div>
+
+        <!-- 3. About Tab View -->
+        <div id="store-tab-about" class="hidden space-y-4">
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 space-y-4">
+            <h3 class="font-bold text-slate-900 text-base">Store & Merchant Profile</h3>
+            <p id="modal-about-desc" class="text-xs sm:text-sm text-slate-600 leading-relaxed"></p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-slate-100 text-xs">
+              <div>
+                <span class="text-slate-400 font-medium">Owner / Proprietor:</span>
+                <p id="modal-about-owner" class="font-bold text-slate-800 mt-0.5"></p>
+              </div>
+              <div>
+                <span class="text-slate-400 font-medium">Direct WhatsApp / Phone:</span>
+                <p id="modal-about-phone" class="font-bold text-emerald-700 mt-0.5"></p>
+              </div>
+              <div>
+                <span class="text-slate-400 font-medium">Shop Location:</span>
+                <p id="modal-about-full-address" class="font-bold text-slate-800 mt-0.5"></p>
+              </div>
+              <div>
+                <span class="text-slate-400 font-medium">Operational Status:</span>
+                <p class="font-bold text-emerald-600 mt-0.5 flex items-center gap-1">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Open Now (Accepting Orders)
+                </p>
+              </div>
+            </div>
+
+            <div class="pt-3 border-t border-slate-100">
+              <span class="text-slate-400 text-xs font-medium">Store Highlights & Certifications:</span>
+              <div id="modal-about-tags" class="flex flex-wrap gap-1.5 mt-2"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Store Modal Footer (Cart Summary bar) -->
+      <div class="bg-white border-t border-slate-200 p-3 sm:px-6 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <button onclick="App.openCartDrawer()" class="flex items-center gap-2 text-xs font-bold text-bazar-700 hover:underline">
+            <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+            <span>View SabkaBazar Cart (<span id="modal-cart-count">0</span> items)</span>
+          </button>
+        </div>
+        <button onclick="App.closeStoreModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-4 py-2 rounded-xl transition">
+          Continue Browsing Other Dukaans
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= MODAL 2: DUKAAN JODO (CONNECT LOCAL STORE & LIST ITEMS) ================= -->
+  <div id="onboarding-modal" class="hidden fixed inset-0 z-50 overflow-y-auto modal-backdrop flex items-center justify-center p-2 sm:p-4">
+    <div class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl border border-slate-200 overflow-hidden max-h-[92vh] flex flex-col animate-in fade-in zoom-in-95 duration-200">
+      
+      <!-- Modal Header -->
+      <div class="bg-gradient-to-r from-bazar-900 via-bazar-800 to-teal-900 text-white p-5 flex items-center justify-between">
+        <div>
+          <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-400 text-slate-900">Merchant Portal</span>
+          <h2 class="text-xl font-bold font-['Outfit'] mt-1">🏪 Dukaan Jodo - Connect Your Local Store</h2>
+          <p class="text-xs text-emerald-200">List your shop on SabkaBazar & reach thousands of local neighborhood customers!</p>
+        </div>
+        <button onclick="App.closeStoreOnboardingModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Form Body -->
+      <form onsubmit="App.handleCreateStore(event)" class="p-6 overflow-y-auto space-y-4 text-xs">
+        
+        <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl text-amber-900 flex items-start gap-2.5">
+          <i data-lucide="sparkles" class="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5"></i>
+          <div>
+            <strong>100% Free Local Store Listing:</strong> Once submitted, your store will immediately be visible under its category with its full catalog & review engine.
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Dukaan / Store Name *</label>
+            <input type="text" id="ob-store-name" required placeholder="e.g. Verma Sanitary & Paints" class="w-full p-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-bazar-600 focus:outline-none">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Primary Category *</label>
+            <select id="ob-store-cat" required class="w-full p-2.5 rounded-xl border border-slate-300 bg-white font-medium focus:ring-2 focus:ring-bazar-600 focus:outline-none">
+              <option value="electronics">⚡ Electronics & Gadgets</option>
+              <option value="hardware">🔧 Hardware & Tools</option>
+              <option value="clothes">👗 Clothes & Fashion</option>
+              <option value="kirana">🛒 Kirana & Supermarket</option>
+              <option value="pharmacy">💊 Pharmacy & Health</option>
+              <option value="stationery">📚 Books & Stationery</option>
+              <option value="homedecor">🛋️ Home Decor & Kitchen</option>
+              <option value="bakery">🎂 Sweets & Bakery</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Owner / Shopkeeper Name *</label>
+            <input type="text" id="ob-store-owner" required placeholder="e.g. Ramesh Verma" class="w-full p-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-bazar-600 focus:outline-none">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Phone / WhatsApp Number *</label>
+            <input type="text" id="ob-store-phone" required placeholder="+91 98111 XXXXX" class="w-full p-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-bazar-600 focus:outline-none">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Shop Address & Market *</label>
+            <input type="text" id="ob-store-address" required placeholder="Shop 12, Main Market, Sector 14" class="w-full p-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-bazar-600 focus:outline-none">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Estimated Delivery Time *</label>
+            <select id="ob-store-time" class="w-full p-2.5 rounded-xl border border-slate-300 bg-white font-medium focus:ring-2 focus:ring-bazar-600 focus:outline-none">
+              <option value="10-15 mins">⚡ 10-15 mins (Superfast)</option>
+              <option value="15-20 mins" selected>15-20 mins (Standard)</option>
+              <option value="20-30 mins">20-30 mins</option>
+              <option value="Store Pickup Only">Store Pickup Only</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Short Description & Specialities</label>
+          <textarea id="ob-store-desc" rows="2" placeholder="e.g. Authorized distributor for Asian Paints, sanitary wares, water taps, emergency plumbing supplies." class="w-full p-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-bazar-600 focus:outline-none"></textarea>
+        </div>
+
+        <!-- Initial Product to list -->
+        <div class="border-t border-slate-200 pt-4">
+          <h4 class="font-bold text-slate-900 text-sm flex items-center gap-1.5 mb-2">
+            <i data-lucide="plus-circle" class="w-4 h-4 text-bazar-600"></i>
+            List Your First Item (You can add more anytime)
+          </h4>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div class="sm:col-span-2">
+              <label class="block font-medium text-slate-600 mb-1">Item Name *</label>
+              <input type="text" id="ob-prod-name" required placeholder="e.g. Asian Paints Royale 1L or 65W Fast Charger" class="w-full p-2 rounded-xl border border-slate-300">
+            </div>
+            <div>
+              <label class="block font-medium text-slate-600 mb-1">Selling Price (₹) *</label>
+              <input type="number" id="ob-prod-price" required placeholder="399" class="w-full p-2 rounded-xl border border-slate-300">
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer Actions -->
+        <div class="pt-3 border-t border-slate-200 flex items-center justify-end gap-2">
+          <button type="button" onclick="App.closeStoreOnboardingModal()" class="px-4 py-2 text-slate-600 font-bold hover:bg-slate-100 rounded-xl transition">
+            Cancel
+          </button>
+          <button type="submit" class="bg-gradient-to-r from-bazar-700 to-bazar-600 hover:from-bazar-800 hover:to-bazar-700 text-white font-bold px-6 py-2.5 rounded-xl shadow-md transition flex items-center gap-2">
+            <i data-lucide="check" class="w-4 h-4"></i>
+            Publish Dukaan to SabkaBazar
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= MODAL 3: ADD ITEM MODAL (FOR EXISTING STORE) ================= -->
+  <div id="add-item-modal" class="hidden fixed inset-0 z-50 overflow-y-auto modal-backdrop flex items-center justify-center p-2 sm:p-4">
+    <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl border border-slate-200 overflow-hidden max-h-[92vh] flex flex-col">
+      <div class="bg-bazar-900 text-white p-4 flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-base font-['Outfit']">Add New Product to Store</h3>
+          <p id="add-item-store-name" class="text-xs text-emerald-200">Store Name</p>
+        </div>
+        <button onclick="App.closeAddItemModal()" class="text-white hover:text-slate-300">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <form onsubmit="App.handleAddNewItem(event)" class="p-5 space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Item Title *</label>
+          <input type="text" id="new-item-title" required placeholder="e.g. Heavy Duty Extension Cord" class="w-full p-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-bazar-600">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Selling Price (₹) *</label>
+            <input type="number" id="new-item-price" required placeholder="499" class="w-full p-2.5 rounded-xl border border-slate-300">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">MRP (₹)</label>
+            <input type="number" id="new-item-mrp" placeholder="799" class="w-full p-2.5 rounded-xl border border-slate-300">
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Subcategory / Tag</label>
+            <input type="text" id="new-item-subcat" placeholder="e.g. Accessories" class="w-full p-2.5 rounded-xl border border-slate-300">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Stock Count</label>
+            <input type="number" id="new-item-stock" value="10" class="w-full p-2.5 rounded-xl border border-slate-300">
+          </div>
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Short Description</label>
+          <textarea id="new-item-desc" rows="2" placeholder="Quality, warranty and specs..." class="w-full p-2.5 rounded-xl border border-slate-300"></textarea>
+        </div>
+        <div class="pt-2 flex justify-end gap-2">
+          <button type="button" onclick="App.closeAddItemModal()" class="px-3 py-2 text-slate-600 font-bold hover:bg-slate-100 rounded-xl">Cancel</button>
+          <button type="submit" class="bg-bazar-600 hover:bg-bazar-700 text-white font-bold px-4 py-2 rounded-xl transition shadow">
+            Save Item
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= SLIDE-OVER DRAWER: SHOPPING CART (BLINKIT STYLE) ================= -->
+  <div id="cart-drawer-backdrop" class="hidden fixed inset-0 z-50 modal-backdrop transition-opacity" onclick="App.closeCartDrawer()"></div>
+  <div id="cart-drawer" class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-white z-50 shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 ease-in-out">
+    
+    <!-- Cart Header -->
+    <div class="p-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-bazar-100 text-bazar-800 flex items-center justify-center font-bold">
+          <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+        </div>
+        <div>
+          <h3 class="font-extrabold text-base text-slate-900 font-['Outfit']">My Local Cart</h3>
+          <p id="drawer-delivery-promise" class="text-[11px] text-emerald-700 font-bold flex items-center gap-1">
+            <i data-lucide="zap" class="w-3 h-3"></i> 15 Mins Superfast Delivery
+          </p>
+        </div>
+      </div>
+      <button onclick="App.closeCartDrawer()" class="w-8 h-8 rounded-full bg-slate-200 hover:bg-slate-300 text-slate-700 flex items-center justify-center transition">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+    </div>
+
+    <!-- Free Delivery Progress Bar -->
+    <div class="bg-emerald-50 px-4 py-2 border-b border-emerald-100 text-xs flex items-center justify-between text-emerald-800">
+      <span class="flex items-center gap-1 font-semibold">
+        <i data-lucide="truck" class="w-3.5 h-3.5 text-bazar-600"></i> Free Delivery on orders over ₹199!
+      </span>
+      <span id="free-delivery-badge" class="font-bold text-emerald-700 text-[10px] bg-emerald-200/80 px-2 py-0.5 rounded">Eligible</span>
+    </div>
+
+    <!-- Cart Items List Container -->
+    <div id="cart-items-container" class="flex-1 overflow-y-auto p-4 space-y-4">
+      <!-- Populated via JS -->
+    </div>
+
+    <!-- Empty Cart State -->
+    <div id="cart-empty-state" class="hidden flex-1 flex flex-col items-center justify-center p-6 text-center">
+      <div class="w-20 h-20 rounded-full bg-slate-100 text-slate-300 flex items-center justify-center mb-3">
+        <i data-lucide="shopping-cart" class="w-10 h-10"></i>
+      </div>
+      <h4 class="font-bold text-slate-800 text-lg">Your Cart is Empty</h4>
+      <p class="text-xs text-slate-500 max-w-xs mt-1">Explore electronics, hardware, clothes, and kirana stores nearby to add items.</p>
+      <button onclick="App.closeCartDrawer(); App.showAllStores();" class="mt-4 bg-bazar-600 hover:bg-bazar-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition shadow">
+        Browse Neighborhood Dukaans
+      </button>
+    </div>
+
+    <!-- Bill Details & Checkout (Hidden if empty) -->
+    <div id="cart-checkout-footer" class="border-t border-slate-200 p-4 bg-slate-50 space-y-3">
+      
+      <!-- Coupon Code Input -->
+      <div class="flex items-center gap-2">
+        <input type="text" id="promo-code-input" placeholder="Promo code (e.g. SABKA50)" class="flex-1 p-2 text-xs border border-slate-300 rounded-xl uppercase font-bold focus:outline-none focus:ring-1 focus:ring-bazar-600">
+        <button onclick="App.applyPromoCode()" class="bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs px-3 py-2 rounded-xl transition">
+          Apply
+        </button>
+      </div>
+      <div id="promo-status" class="hidden text-[11px] font-semibold text-emerald-600"></div>
+
+      <!-- Bill Breakdown -->
+      <div class="space-y-1.5 text-xs text-slate-600 border-t border-slate-200 pt-2">
+        <div class="flex justify-between">
+          <span>Items Total</span>
+          <span id="bill-subtotal" class="font-bold text-slate-900">₹0</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="flex items-center gap-1">Local Delivery Partner Fee</span>
+          <span id="bill-delivery" class="text-emerald-700 font-bold">FREE</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Store Handling & Bag</span>
+          <span class="font-medium text-slate-700">₹5</span>
+        </div>
+        <div id="bill-discount-row" class="hidden flex justify-between text-emerald-600 font-bold">
+          <span>Coupon Discount (SABKA50)</span>
+          <span id="bill-discount">-₹50</span>
+        </div>
+        <div class="flex justify-between text-sm font-extrabold text-slate-900 border-t border-slate-200 pt-2">
+          <span>Grand Total to Pay</span>
+          <span id="bill-grand-total" class="text-bazar-700 font-['Outfit'] text-base">₹0</span>
+        </div>
+      </div>
+
+      <!-- Checkout Button -->
+      <button onclick="App.proceedToCheckout()" class="w-full bg-gradient-to-r from-bazar-700 to-bazar-600 hover:from-bazar-800 hover:to-bazar-700 text-white font-extrabold py-3 px-4 rounded-xl shadow-lg shadow-emerald-700/25 transition flex items-center justify-between text-sm">
+        <div class="text-left leading-tight">
+          <div id="btn-checkout-amount" class="text-xs text-emerald-200">Total: ₹0</div>
+          <div>Place Order (15 Mins)</div>
+        </div>
+        <div class="flex items-center gap-1">
+          <span>Proceed</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </div>
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- ================= MODAL 4: CHECKOUT & LIVE ORDER SIMULATION ================= -->
+  <div id="checkout-modal" class="hidden fixed inset-0 z-50 overflow-y-auto modal-backdrop flex items-center justify-center p-2 sm:p-4">
+    <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl border border-slate-200 overflow-hidden max-h-[92vh] flex flex-col">
+      <div class="bg-bazar-800 text-white p-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <i data-lucide="shield-check" class="w-5 h-5 text-amber-300"></i>
+          <h3 class="font-bold text-base font-['Outfit']">SabkaBazar Hyperlocal Checkout</h3>
+        </div>
+        <button onclick="App.closeCheckoutModal()" class="text-white hover:text-slate-300">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="p-5 space-y-4 text-xs overflow-y-auto">
+        <!-- Delivery Address -->
+        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-800 flex items-center gap-1.5">
+              <i data-lucide="map-pin" class="w-4 h-4 text-bazar-600"></i> Delivery Address
+            </span>
+            <span class="text-emerald-700 font-bold text-[11px]">15 Mins Away</span>
+          </div>
+          <p class="text-slate-600 font-medium">Flat 402, Tower B, Sector 14, Main Market Road, Gurugram</p>
+          <input type="text" placeholder="Add Landmark or Flat instructions (e.g. Leave with guard)" class="w-full p-2 bg-white border border-slate-200 rounded-lg text-xs">
+        </div>
+
+        <!-- Payment Mode Selection -->
+        <div>
+          <label class="block font-bold text-slate-800 mb-2">Select Payment Method</label>
+          <div class="space-y-2">
+            <label class="flex items-center justify-between p-3 border-2 border-emerald-500 bg-emerald-50/50 rounded-xl cursor-pointer">
+              <div class="flex items-center gap-3">
+                <input type="radio" name="payment_mode" value="upi" checked class="text-bazar-600">
+                <div>
+                  <div class="font-bold text-slate-900">Instant UPI (Google Pay / PhonePe / Paytm)</div>
+                  <div class="text-[11px] text-slate-500">Fastest confirmation & zero contact</div>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-emerald-700">⚡ Instant</span>
+            </label>
+
+            <label class="flex items-center justify-between p-3 border border-slate-200 hover:border-slate-300 rounded-xl cursor-pointer">
+              <div class="flex items-center gap-3">
+                <input type="radio" name="payment_mode" value="cod" class="text-bazar-600">
+                <div>
+                  <div class="font-bold text-slate-900">Cash on Delivery (Pay Shopkeeper Rider)</div>
+                  <div class="text-[11px] text-slate-500">Pay cash or scan QR when order reaches you</div>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-slate-500">Cash / QR</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Order Summary Preview -->
+        <div class="bg-slate-100 p-3 rounded-xl flex items-center justify-between font-bold text-slate-800">
+          <span>Amount Payable:</span>
+          <span id="checkout-final-amount" class="text-base text-bazar-700 font-['Outfit']">₹0</span>
+        </div>
+
+        <button onclick="App.confirmAndTrackOrder()" class="w-full bg-bazar-600 hover:bg-bazar-700 text-white font-extrabold py-3 rounded-xl shadow-lg shadow-emerald-700/20 text-sm transition flex items-center justify-center gap-2">
+          <i data-lucide="check-circle" class="w-4 h-4"></i>
+          Confirm & Place Order
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL 5: LIVE ORDER TRACKER SIMULATION ================= -->
+  <div id="tracking-modal" class="hidden fixed inset-0 z-50 overflow-y-auto modal-backdrop flex items-center justify-center p-2 sm:p-4">
+    <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl border border-slate-200 overflow-hidden max-h-[92vh] flex flex-col animate-in fade-in zoom-in-95">
+      <div class="bg-gradient-to-r from-bazar-900 to-teal-900 text-white p-5 text-center relative">
+        <button onclick="App.closeTrackingModal()" class="absolute top-3 right-3 text-white/70 hover:text-white">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+        <div class="w-12 h-12 rounded-full bg-emerald-500 text-white flex items-center justify-center mx-auto mb-2 shadow-lg">
+          <i data-lucide="check" class="w-6 h-6 stroke-[3]"></i>
+        </div>
+        <h3 class="text-xl font-black font-['Outfit']">Order Placed Successfully!</h3>
+        <p class="text-xs text-emerald-200 mt-0.5">Order ID: <span id="tracking-order-id" class="font-mono font-bold">#SB-9821</span></p>
+      </div>
+
+      <div class="p-6 space-y-6 text-xs overflow-y-auto">
+        <!-- Live Status Tracker Stepper -->
+        <div class="space-y-4">
+          <div class="flex items-start gap-3">
+            <div class="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center flex-shrink-0 font-bold">✓</div>
+            <div>
+              <div class="font-bold text-slate-900 text-sm">Order Accepted by Shopkeeper</div>
+              <div class="text-slate-500 text-[11px]">Sharma Electronics confirmed receipt & is packing original items.</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-7 h-7 rounded-full bg-amber-500 text-white flex items-center justify-center flex-shrink-0 font-bold animate-pulse">2</div>
+            <div>
+              <div class="font-bold text-amber-700 text-sm">Packing & Invoice Generation</div>
+              <div class="text-slate-500 text-[11px]">Bill with GST & warranty seal being prepared.</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 opacity-60">
+            <div class="w-7 h-7 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center flex-shrink-0 font-bold">3</div>
+            <div>
+              <div class="font-bold text-slate-700 text-sm">Rider Dispatched</div>
+              <div class="text-slate-500 text-[11px]">Local delivery partner heading to your doorstep in 15 mins.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 text-center">
+          <div class="text-emerald-800 font-extrabold text-sm">Estimated Delivery Time</div>
+          <div class="text-3xl font-black text-emerald-700 font-['Outfit'] my-1">14 Mins</div>
+          <div class="text-[11px] text-emerald-600 font-medium">SabkaBazar Delivery Fleet is on the move</div>
+        </div>
+
+        <div class="flex items-center justify-center gap-3">
+          <button onclick="App.closeTrackingModal(); App.showAllStores();" class="w-full bg-bazar-600 hover:bg-bazar-700 text-white font-bold py-2.5 rounded-xl transition">
+            Continue Shopping at SabkaBazar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL 6: LOCATION CHANGER ================= -->
+  <div id="location-modal" class="hidden fixed inset-0 z-50 overflow-y-auto modal-backdrop flex items-center justify-center p-2 sm:p-4">
+    <div class="bg-white w-full max-w-sm rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
+      <div class="p-4 border-b border-slate-100 flex items-center justify-between">
+        <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+          <i data-lucide="map-pin" class="w-4 h-4 text-bazar-600"></i> Select Your Locality
+        </h3>
+        <button onclick="App.closeLocationModal()" class="text-slate-400 hover:text-slate-600">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <div class="p-4 space-y-2 text-xs">
+        <p class="text-slate-500 text-[11px] mb-2">Choose your delivery area to connect with nearby local shops:</p>
+        <button onclick="App.selectLocation('Sector 14, Main Market, Gurugram')" class="w-full text-left p-2.5 rounded-xl hover:bg-emerald-50 border border-slate-200 hover:border-emerald-300 font-semibold text-slate-800 transition">
+          📍 Sector 14, Main Market, Gurugram
+        </button>
+        <button onclick="App.selectLocation('DLF Phase 2, Central Arcade, Gurugram')" class="w-full text-left p-2.5 rounded-xl hover:bg-emerald-50 border border-slate-200 hover:border-emerald-300 font-semibold text-slate-800 transition">
+          📍 DLF Phase 2, Central Arcade, Gurugram
+        </button>
+        <button onclick="App.selectLocation('Krishna Market, Old Railway Road')" class="w-full text-left p-2.5 rounded-xl hover:bg-emerald-50 border border-slate-200 hover:border-emerald-300 font-semibold text-slate-800 transition">
+          📍 Krishna Market, Old Railway Road
+        </button>
+        <button onclick="App.selectLocation('Sadar Bazaar & Commercial Belt')" class="w-full text-left p-2.5 rounded-xl hover:bg-emerald-50 border border-slate-200 hover:border-emerald-300 font-semibold text-slate-800 transition">
+          📍 Sadar Bazaar & Commercial Belt
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- App Data & Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
